@@ -1,20 +1,22 @@
 import { Component, Inject }                        from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatFormFieldModule }                       from '@angular/material/form-field';
+import { MatInputModule}                            from '@angular/material/input';
 
 import { IEditListItem }                            from '../interfaces/i-edit-list-item';
 import { Settings }                                 from '../models/settings';
 
 @Component({
-  selector: 'app-edit-settings',
-  templateUrl: './edit-settings.component.html',
-  styleUrls: ['./edit-settings.component.scss']
+  selector: 'app-edit-properties',
+  templateUrl: './edit-properties.component.html',
+  styleUrls: ['./edit-properties.component.scss']
 })
-export class EditSettingsComponent
+export class EditPropertiesComponent
 {
 
   public settingsList :IEditListItem[];
 
-  constructor(public dialogRef :MatDialogRef<EditSettingsComponent>,
+  constructor(public dialogRef :MatDialogRef<EditPropertiesComponent>,
               @Inject(MAT_DIALOG_DATA) public data :IEditListItem[])
   {
     this.settingsList = data;
