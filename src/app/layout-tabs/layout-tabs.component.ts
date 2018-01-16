@@ -1,7 +1,8 @@
 import { Component, ViewEncapsulation }     from '@angular/core';
-import { OnInit, OnDestroy }                from '@angular/core';
+import { ViewChild, OnInit, OnDestroy }     from '@angular/core';
 import { MatTabsModule, MatTabChangeEvent } from '@angular/material/tabs';
 import { Subscription }                     from 'rxjs/Subscription';
+
 
 import { ConfirmDialogComponent }           from '../confirm-dialog/confirm-dialog.component';
 import { LayoutPage }                       from '../models/layout-page';
@@ -10,6 +11,7 @@ import { Settings }                         from '../models/settings';
 import { SettingsService }                  from '../settings.service';
 import { StatusItem }                       from '../status-item';
 import { StatusItemService }                from '../status-item.service';
+import { WidjetComponent }                  from '../widjet/widjet.component';
 
 @Component({
   selector: 'app-layout-tabs',
@@ -28,9 +30,13 @@ export class LayoutTabsComponent implements OnInit, OnDestroy {
   public  layoutPages             :LayoutPage[];
   public  selectedTabIndex        :number = 0;
 
+  @ViewChild(WidjetComponent)
+  private _widjetComponent: WidjetComponent;
+
   constructor( private _layoutPageService :LayoutPageService,
                private _settingsService   :SettingsService,
-               private _statusItemService :StatusItemService )
+               private _statusItemService :StatusItemService,
+               )
   { }
 
   ngOnInit()
@@ -231,4 +237,9 @@ export class LayoutTabsComponent implements OnInit, OnDestroy {
 
     this._settingsService.updateSettings(this._settings);
   }
+
+  public createWidget(str){
+    this._widjetComponent.createWidget(str)
+  }
+
 }

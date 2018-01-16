@@ -7,6 +7,7 @@ import { CookieService }              from 'ngx-cookie';
 import { LayoutTabsComponent }        from './layout-tabs/layout-tabs.component';
 import { MenuComponent }              from './menu/menu.component';
 import { Settings }                   from './models/settings';
+import { WidjetComponent } from './widjet/widjet.component';
 
 @Component({
   selector: 'app-root',

@@ -14,10 +14,11 @@
     </ng-template>
 
     <div class="layout-tab-content">
-      <svg class='svg-element'
+
+      <svg id = 'canvas' class= 'svg-element'
            attr.height='{{layoutPages[ix].height}}'
            attr.width='{{layoutPages[ix].width}}'>
-        <path *ngIf="(ix % 4) == 0" class='svg-rect0' d='M 10 10 h 100 v 100 h -100 v -100'/>
+           <svg app-widjet/>
         <path *ngIf="(ix % 4) == 1" class='svg-rect1' d='M 10 10 h 100 v 100 h -100 v -100'/>
         <path *ngIf="(ix % 4) == 2" class='svg-rect2' d='M 10 10 h 100 v 100 h -100 v -100'/>
         <path *ngIf="(ix % 4) == 3" class='svg-rect3' d='M 10 10 h 100 v 100 h -100 v -100'/>

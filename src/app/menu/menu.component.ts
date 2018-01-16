@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { EditSettingsComponent }                    from '../edit-settings/edit-settings.component';
 import { LayoutTabsComponent }                      from '../layout-tabs/layout-tabs.component';
+import { WidjetComponent }                          from '../widjet/widjet.component';
 import { Settings }                                 from '../models/settings';
 import { SettingsService }                          from '../settings.service';
 
@@ -20,6 +21,7 @@ export class MenuComponent {
   { }
 
   layoutTabsComponent :LayoutTabsComponent;   // Set by AppComponent
+  widjetComponent :WidjetComponent; 
 
   public selectedMenuItem :string;                   // The label of the selected menu item
 
@@ -215,6 +217,7 @@ export class MenuComponent {
         break;
 
       case "widgetMenu_RolrStr":
+        this.layoutTabsComponent.createWidget('RolrStr');
         break;
 
       case "widgetMenu_RolrCur":

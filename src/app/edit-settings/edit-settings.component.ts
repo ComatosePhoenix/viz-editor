@@ -3,7 +3,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AbstractControl}                           from '@angular/forms';
 import { ITdDynamicElementConfig, TdDynamicElement, TdDynamicType}                from '@covalent/dynamic-forms';
 import { IEditListItem }                            from '../interfaces/i-edit-list-item';
-import { Settings }                                 from '../models/settings';
 import { SettingsService } from '../settings.service';
 
 @Component({
@@ -36,7 +35,7 @@ export class EditSettingsComponent
         rArray.push(element);
       }});
     //what the heck rArray isn't the expected value at all.
-    let rVal = data.value
+    let rVal = data.value;
       rVal.displayableProperties = this.settingsList;//todo: fix the settings object
       
     this.dialogRef.close(rVal);
@@ -46,7 +45,7 @@ export class EditSettingsComponent
     let rVal : ITdDynamicElementConfig[] = [];
     
     obj.forEach(element => {
-      rVal.push({name: element.name, label: element.name, type: TdDynamicType.Number, default: element.value});
+      rVal.push({name: element.name, label: element.name, type: TdDynamicType.Text, default: element.value});
       
     });
 

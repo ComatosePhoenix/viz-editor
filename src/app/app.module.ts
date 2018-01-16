@@ -29,6 +29,7 @@ import { MenuComponent }            from './menu/menu.component';
 import { SettingsService }          from './settings.service';
 import { StatusItemListComponent }  from './status-item-list/status-item-list.component';
 import { StatusItemService }        from './status-item.service';
+import { WidjetComponent } from './widjet/widjet.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { StatusItemService }        from './status-item.service';
     LayoutTabsComponent,
     StatusItemListComponent,
     EditSettingsComponent,
+    WidjetComponent,
   ],
   imports: [
     BrowserModule,            // The order of this and MatTabsModule is critical
