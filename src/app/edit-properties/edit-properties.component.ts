@@ -2,23 +2,24 @@ import { Component, Inject }                        from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AbstractControl}                           from '@angular/forms';
 import { ITdDynamicElementConfig, TdDynamicElement, TdDynamicType}                from '@covalent/dynamic-forms';
+import { MatFormFieldModule }                       from '@angular/material/form-field';
+import { MatInputModule}                            from '@angular/material/input';
+
 import { IEditListItem }                            from '../interfaces/i-edit-list-item';
 import { SettingsService } from '../settings.service';
 
 @Component({
-  selector: 'app-edit-settings',
-  templateUrl: './edit-settings.component.html',
-  styleUrls: ['./edit-settings.component.scss']
+  selector: 'app-edit-properties',
+  templateUrl: './edit-properties.component.html',
+  styleUrls: ['./edit-properties.component.scss']
 })
-export class EditSettingsComponent
+export class EditPropertiesComponent
 {
 
   public settingsList :IEditListItem[];
-
-  public dynamicSettingsList : ITdDynamicElementConfig[];
-  
-  constructor(public dialogRef :MatDialogRef<EditSettingsComponent>,
-              @Inject(MAT_DIALOG_DATA) public data :IEditListItem[],   private service: SettingsService)
+  public dynamicSettingsList;
+  constructor(public dialogRef :MatDialogRef<EditPropertiesComponent>,
+              @Inject(MAT_DIALOG_DATA) public data :IEditListItem[])
   {
     this.settingsList = data;
     this.dynamicSettingsList = this.formatConfig(data);
@@ -34,11 +35,7 @@ export class EditSettingsComponent
         element.value = data.value[element.name];
         rArray.push(element);
       }});
-    //what the heck rArray isn't the expected value at all.
-    let rVal = data.value;
-      rVal.displayableProperties = this.settingsList;//todo: fix the settings object
-      
-    this.dialogRef.close(rVal);
+    this.dialogRef.close(rArray);
   }
 
   formatConfig(obj: {name: string, value: string | number | boolean}[]) : ITdDynamicElementConfig[]{

@@ -12,7 +12,7 @@ import { buildEditList }      from './globals/utilities/buildEditList';
 export class SettingsService {
 
   private _settingsCookieKey = "editorSettings";
-  private _settings   :Settings;
+  private _settings   :Settings = new Settings();
   private _settings$  :BehaviorSubject<Settings>;
 
   constructor(private _cookieService :CookieService)
@@ -45,25 +45,48 @@ export class SettingsService {
    */
   private loadSettingsFromCookie() :void
   {
-    console.log(`SettingsService.loadSettingsFromCookie(): Begins`)
-    if (this._cookieService.get(this._settingsCookieKey))
+    console.log(`SettingsService.loadSettingsFromCookie(): Begins`);
+
+    let settingsObj;
+    
+    let cookieData = this._cookieService.get(this._settingsCookieKey);
+    if (cookieData)
     {
-      this._settings = this._cookieService.getObject(this._settingsCookieKey) as Settings;
-      console.log(`SettingsService.loadSettingsFromCookie(): this._settings loaded from cookie: '${JSON.stringify(this._settings)}'`)
+      console.log(`SettingsService.loadSettingsFromCookie(): cookieData = '${cookieData}'`);
+      settingsObj = JSON.parse(cookieData);
+    }
+
+    if (settingsObj)
+    {
+      console.log(`SettingsService.loadSettingsFromCookie(): settingsObj = '${JSON.stringify(settingsObj)}'`);
+        for (let ix = 0; ix < Object.entries(settingsObj).length; ix++)
+        {
+          let item = Object.entries(settingsObj)[ix];
+          this._settings[item[0]] = item[1];
+        };
+    
+      console.log(`SettingsService.loadSettingsFromCookie(): this._settings loaded from cookie`);
     }
     else
     {
-      this._settings = new Settings;
-      console.log(`SettingsService.loadSettingsFromCookie(): this._settings loaded from cookie: '${this._settings}'`)
+      console.log(`SettingsService.loadSettingsFromCookie(): Settings cookie not found`);
+      // The current this._settings is assumed to contain the default settings
+      this._cookieService.put(this._settingsCookieKey, JSON.stringify(this._settings));
+      console.log(`SettingsService.loadSettingsFromCookie(): new cookie created`);
     }
-    console.log(`SettingsService.loadSettingsFromCookie(): Ends`)
+    
+    console.log(`SettingsService.loadSettingsFromCookie(): Ends; this._settings ='${JSON.stringify(this._settings)}'`)
   }
 
+  /*
+   *  Restore Settings to their default values.
+   */
   public restoreDefaultSettings() :void
   {
     console.log(`SetingsService.restoreDefaultSettings(): Begins`);
-    this._settings = new Settings();
-    this._settings$.next(this._settings);
+    this.updateSettings(new Settings());
+
+    console.log(`SettingsService.restoreDefaultSettings(): cookie = '${this._cookieService.get(this._settingsCookieKey)}'`)
     console.log(`SetingsService.restoreDefaultSettings(): Ends`);
   }
 
@@ -82,7 +105,7 @@ export class SettingsService {
   {
     console.log(`SettingsService.updateSettings(): Begins; pSettings = '${pSettings}'`)
     this._settings = pSettings;
-    this._cookieService.putObject(this._settingsCookieKey, this._settings);
+    this._cookieService.put(this._settingsCookieKey, JSON.stringify(this._settings));
     this._settings$.next(this._settings);
     console.log(`SettingsService.updateSettings(): Ends`)
   }
@@ -93,28 +116,13 @@ export class SettingsService {
     */
   public updateSettingsFromList(pSettingsList :IEditListItem[]) :void
   {
+    console.log(`SettingsService.updateSettingsFromList(): Begins; pSettingsList.length='${pSettingsList.length}'`);
     pSettingsList.forEach(setting =>
       {
-        switch (setting.name)
-        {
-          case 'defPageHeight':
-            this._settings.defPageHeight = setting.value as number;
-            break;
-
-          case 'defPageWidth':
-            this._settings.defPageWidth = setting.value as number;
-            break;
-              
-          case 'defScale':
-            this._settings.defScale = setting.value as number;
-            break;
-              
-          case 'defConveyorWidthIn':
-            this._settings.defConveyorWidthIn = setting.value as number;
-            break;
-        }
-
-        this._settings$.next(this._settings);
+        this._settings[setting.name] = setting.value;
       });
+
+    this._settings$.next(this._settings);
+    console.log(`SettingsService.updateSettingsFromList(): Ends; this._settings='${JSON.stringify(this._settings)}'`);
   }
 }

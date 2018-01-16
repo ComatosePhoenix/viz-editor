@@ -2,8 +2,6 @@ import { Component, OnInit }          from '@angular/core';
 import { AfterViewInit, ViewChild }   from '@angular/core';
 import { HostListener }               from '@angular/core';
 
-import { CookieService }              from 'ngx-cookie';
-
 import { LayoutTabsComponent }        from './layout-tabs/layout-tabs.component';
 import { MenuComponent }              from './menu/menu.component';
 import { Settings }                   from './models/settings';
@@ -24,21 +22,11 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild(MenuComponent)
   private _menuComponent: MenuComponent;
 
-  constructor(private _cookieService :CookieService)
+  constructor()
   { }
 
   ngOnInit()
-  {
-    // If the cookie used to persist the editor's settings does not
-    // exist, create the cookie using the default settings values.
-    const settingsKey = "editorSettings";
-    if (!this._cookieService.get(settingsKey))
-    {
-      let settings = new Settings();    // Used default settings values
-      this._cookieService.putObject(settingsKey, settings);
-      console.log(`AppComponent.ngOnInit(): 'settings' cookie created: ${settings}`);
-    }
-  }
+  { }
  
   ngAfterViewInit()
   {

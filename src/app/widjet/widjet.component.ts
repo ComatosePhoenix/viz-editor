@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Widget } from '../models/widget';
 import { conveyerWidget } from './widgets/conveyer-widget';
-import { EditSettingsComponent } from '../edit-settings/edit-settings.component';
+import { EditPropertiesComponent } from '../edit-properties/edit-properties.component';
 import { IEditListItem } from '../interfaces/i-edit-list-item';
 
 
@@ -57,7 +57,7 @@ export class WidjetComponent implements OnInit {
       data.push({name: d, value:widget[d], isEditable: true})
     })
 
-    let dialogRef = this._dialog.open(EditSettingsComponent,
+    let dialogRef = this._dialog.open(EditPropertiesComponent,
       { minWidth: '350px', maxHeight: '600px',
         data: data
       });
@@ -67,8 +67,8 @@ export class WidjetComponent implements OnInit {
         console.log(`widjetComponent.editDiaglog.dialogRef.afterClosed(): result = '${result}'`);
         if (result)
         { 
-          keys.forEach(function(k){
-            widget[k]= result[k]; 
+          result.forEach(function(k){
+            widget[k.name]= k.value; 
           })
           console.log(result);
         }

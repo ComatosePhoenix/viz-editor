@@ -20,8 +20,7 @@ import { CovalentDynamicFormsModule } from '@covalent/dynamic-forms';
 import { CookieModule }             from 'ngx-cookie';
 
 import { AppComponent }             from './app.component';
-import { ConfirmDialogComponent }   from './confirm-dialog/confirm-dialog.component';
-import { EditSettingsComponent }    from './edit-settings/edit-settings.component';
+import { EditPropertiesComponent }  from './edit-properties/edit-properties.component';
 import { LayoutPageService }        from './layout-page.service';
 import { LayoutTabsComponent }      from './layout-tabs/layout-tabs.component';
 
@@ -34,12 +33,11 @@ import { WidjetComponent } from './widjet/widjet.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ConfirmDialogComponent,
     MenuComponent,
     LayoutTabsComponent,
     StatusItemListComponent,
-    EditSettingsComponent,
     WidjetComponent,
+    EditPropertiesComponent,
   ],
   imports: [
     BrowserModule,            // The order of this and MatTabsModule is critical
@@ -62,10 +60,10 @@ import { WidjetComponent } from './widjet/widjet.component';
     MatToolbarModule,
     MatIconModule,
     MatListModule,
+    
   ],
   entryComponents: [
-    ConfirmDialogComponent,
-    EditSettingsComponent
+    EditPropertiesComponent
   ],
   providers: [
     LayoutPageService,
