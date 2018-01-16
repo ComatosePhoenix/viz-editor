@@ -28,11 +28,12 @@ export class WidjetComponent implements OnInit {
   createWidget(type){
     let newWidget;
     switch (type){
-      case 'rollStr': break;
-      default: newWidget = new conveyerWidget('test2', 200, 200, 0 , 1, 100, 100);
+      case 'RolrStr':  newWidget = new conveyerWidget('RolrStr', 100, 100, 0 , 1, 100, 100); break;
+      case 'RolrCur':  newWidget = new conveyerWidget('RolrCur', 100, 100, 0 , 1, 100, 100); break;
+      case 'BeltStr':  newWidget = new conveyerWidget('BeltStr', 100, 100, 0 , 1, 100, 100); break;
+      case 'BeltCur':  newWidget = new conveyerWidget('BeltCur', 100, 100, 0 , 1, 100, 100); break;
+      default: console.error('unrecognized widget type'); break;
     }
-
-    newWidget = new conveyerWidget('test2', 200, 200, 0 , 1,  100, 100);
 
     this.widgets.push(newWidget);
   }

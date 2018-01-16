@@ -16,7 +16,7 @@ export class conveyerWidget extends Widget{
         x: number, 
         y: number){
              super(pTypeName, pLength, pWidth, pRotation, pScale, x, y);
-        this.svgClass = 'svg-rect1'// color of conveyerWidget
+        this.svgClass = pTypeName // color of conveyerWidget
 
         
 
@@ -27,9 +27,6 @@ export class conveyerWidget extends Widget{
     //What is an HTMLElement, a miserable little pile of secrets?
     renderAsPath():HTMLElement{
         let html = new HTMLElement;
-        
-       
-
         return html;
     }
 

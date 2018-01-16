@@ -232,12 +232,15 @@ export class MenuComponent {
         break;
 
       case "widgetMenu_RolrCur":
+        this.layoutTabsComponent.createWidget('RolrCur');
         break;
 
       case "widgetMenu_BeltStr":
+        this.layoutTabsComponent.createWidget('BeltStr');
         break;
 
       case "widgetMenu_BeltCur":
+        this.layoutTabsComponent.createWidget('BeltCur');
         break;
 
       case "widthMenu_+1":
