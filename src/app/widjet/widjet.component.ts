@@ -67,6 +67,9 @@ export class WidjetComponent implements OnInit {
         console.log(`widjetComponent.editDiaglog.dialogRef.afterClosed(): result = '${result}'`);
         if (result)
         { 
+          keys.forEach(function(k){
+            widget[k]= result[k]; 
+          })
           console.log(result);
         }
     });
