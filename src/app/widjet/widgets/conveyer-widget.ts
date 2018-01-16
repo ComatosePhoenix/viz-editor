@@ -15,10 +15,8 @@ export class conveyerWidget extends Widget{
         pScale    :number, 
         x: number, 
         y: number){
-             super(pTypeName, pLength, pWidth, pRotation, pScale);
+             super(pTypeName, pLength, pWidth, pRotation, pScale, x, y);
         this.svgClass = 'svg-rect1'// color of conveyerWidget
-        this.x = x;
-        this.y = y;
 
         
 

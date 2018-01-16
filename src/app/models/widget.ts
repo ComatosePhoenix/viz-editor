@@ -7,19 +7,27 @@ export abstract class Widget
     public scale      :number;          // Scale: inches/pixel
     public width      :number;          // Width: pixels
     public unitId     :string;          // The unique unit ID
+    public x          :number;          //position;
+    public y          :number;
     public readonly typeName :string;   // The equipment type
-    
+    private offset;          //private instance variable used in making smooth movement
+
+
     constructor( pTypeName :string,
                  pLength   :number,
                  pWidth    :number,
                  pRotation :number,
-                 pScale    :number )
+                 pScale    :number,
+                 x         :number,
+                 y         :number )
     {
         this.typeName = pTypeName;
         this.length   = pLength;
         this.width    = pWidth;
         this.rotation = pRotation;
         this.scale    = pScale;
+        this.x = x;
+        this.y = y;
     }
 
     public isIdentical(pWidget :Widget) :boolean
@@ -39,6 +47,23 @@ export abstract class Widget
      */
     abstract renderAsPath() :HTMLElement;
 
+
+    public stickToMouse(){
+        let me = this;
+        onmousemove = function(e){
+            me.x += e.movementX,
+            me.y += e.movementY;
+        }
+    }
+
+    public unStick(){
+        onmousemove = null;
+    }
+
+
+    public editButton(){
+        return (this.x+10)+','+(this.y+10)+' '+ (this.x+10)+ ',' +(this.y+20)+' ' +(this.x+20)+','+ (this.y+15);
+    }
     /*
      *  This method recalculates the length and width for the
      *  widget, based on the current values (in pixels) and

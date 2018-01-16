@@ -48,6 +48,25 @@ export class WidjetComponent implements OnInit {
     console.log(this.widgets);
   }
 
+  clickAndDrag(k){
+    let widget = this.widgets[k];
+    if (widget.isSelected){
+      widget.isSelected = false;
+      this.releaseWidget(widget);
+    }else{
+      widget.isSelected = true;
+      this.grabWidget(widget)
+    }
+  }
+
+  grabWidget(widget) {
+    widget.stickToMouse();
+  }
+
+  releaseWidget(widget){
+    widget.unStick();
+  }
+
   edit(k){
     console.log('editing widget ' + k);
     let widget = this.widgets[k];
