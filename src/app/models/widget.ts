@@ -51,8 +51,8 @@ export abstract class Widget
     public stickToMouse(){
         let me = this;
         onmousemove = function(e){
-            me.x += e.movementX,
-            me.y += e.movementY;
+            me.x = Number(me.x) + e.movementX,
+            me.y = Number(me.y) + e.movementY;
         }
     }
 

@@ -1,11 +1,10 @@
-    <svg:path class='svg-rect0' d='M 10 10 h 100 v 100 h -100 v -100'/>
     <svg *ngFor ='let widget of widgets; index as i;' >
         <svg:path
+                (dblclick) = edit(i)
                 (mousedown) = grabWidget(widget) 
                 (mouseup)= releaseWidget(widget) 
                 [attr.class] = widget.svgClass 
                 [attr.d] = widget.pathAsString()
             >
         </svg:path>
-          <polygon (click) = edit(i) [attr.points]= widget.editButton() style="fill:lime;stroke:purple;stroke-width:1"></polygon>
     </svg>
