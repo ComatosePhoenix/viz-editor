@@ -17,7 +17,6 @@ import { IEditListItem } from '../interfaces/i-edit-list-item';
 export class WidjetComponent implements OnInit {
   private widgets : Widget[];
   
-  
   constructor( private _dialog :MatDialog){
     this.widgets = [];
     let placeholderWidget = new conveyerWidget('test', 100, 100, 0 , 1, 100, 100);
@@ -39,7 +38,10 @@ export class WidjetComponent implements OnInit {
   }
 
 
-  renderWidgets(){
+  private renderWidgets(){
+    this.widgets.forEach(function(widget){
+      this._svgTarget.append(widget.renderAsPath);
+    })
 
   }
 
@@ -49,6 +51,7 @@ export class WidjetComponent implements OnInit {
     console.log(this.widgets);
   }
 
+  //this was dumb,pretend I never wrote it.
   clickAndDrag(k){
     let widget = this.widgets[k];
     if (widget.isSelected){
@@ -66,6 +69,11 @@ export class WidjetComponent implements OnInit {
 
   releaseWidget(widget){
     widget.unStick();
+  }
+
+
+  delete(k){
+    this.widgets.splice(k,1);
   }
 
   edit(k){

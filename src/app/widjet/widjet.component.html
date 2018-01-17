@@ -1,4 +1,4 @@
-    <svg *ngFor ='let widget of widgets; index as i;' >
+    <svg:g *ngFor ='let widget of widgets; index as i;' id = 'g{{i}}'>
         <svg:path
                 (dblclick) = edit(i)
                 (mousedown) = grabWidget(widget) 
@@ -7,4 +7,5 @@
                 [attr.d] = widget.pathAsString()
             >
         </svg:path>
-    </svg>
+        <svg:polygon (click) = delete(i) [attr.points]= widget.editButton() class = 'svg-exit'/>
+    </g>

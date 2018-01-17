@@ -47,7 +47,6 @@ export abstract class Widget
      */
     abstract renderAsPath() :HTMLElement;
 
-
     public stickToMouse(){
         let me = this;
         onmousemove = function(e){

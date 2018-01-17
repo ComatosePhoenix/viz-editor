@@ -17,17 +17,15 @@ export class conveyerWidget extends Widget{
         y: number){
              super(pTypeName, pLength, pWidth, pRotation, pScale, x, y);
         this.svgClass = pTypeName // color of conveyerWidget
-
-        
-
     }
 
-
+   
 
     //What is an HTMLElement, a miserable little pile of secrets?
     renderAsPath():HTMLElement{
         let html = document.createElement('path');
-
+        let pathstring = "M " + this.x+ " "+ this.y+" h "+ this.length +" v "+ this.width+ " h -"+ this.length + " v -" +this.width
+        html.setAttribute('d', pathstring);
 
         return html;
     }
