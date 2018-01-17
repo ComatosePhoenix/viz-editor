@@ -2,7 +2,7 @@ import {Widget} from '../../models/widget'
 
 
 
-export class conveyerWidget extends Widget{
+export class blockWidget extends Widget{
     public properties // properties are an object that will somehow uniquely connect the widget to its real life counterpart.
     public svgClass;
     public x;
@@ -16,7 +16,7 @@ export class conveyerWidget extends Widget{
         x: number, 
         y: number){
              super(pTypeName, pLength, pWidth, pRotation, pScale, x, y);
-        this.svgClass = pTypeName // color of conveyerWidget
+        this.svgClass = pTypeName // color of blockWidget
     }
 
    

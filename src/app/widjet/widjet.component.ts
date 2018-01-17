@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Widget } from '../models/widget';
-import { conveyerWidget } from './widgets/conveyer-widget';
+import { blockWidget } from './widgets/block-widget';
 import { EditPropertiesComponent } from '../edit-properties/edit-properties.component';
 import { IEditListItem } from '../interfaces/i-edit-list-item';
 
@@ -19,7 +19,7 @@ export class WidjetComponent implements OnInit {
   
   constructor( private _dialog :MatDialog){
     this.widgets = [];
-    let placeholderWidget = new conveyerWidget('test', 100, 100, 0 , 1, 100, 100);
+    let placeholderWidget = new blockWidget('test', 100, 100, 0 , 1, 100, 100);
 
     this.widgets.push(placeholderWidget);
   }
@@ -27,10 +27,10 @@ export class WidjetComponent implements OnInit {
   createWidget(type){
     let newWidget;
     switch (type){
-      case 'RolrStr':  newWidget = new conveyerWidget('RolrStr', 100, 100, 0 , 1, 100, 100); break;
-      case 'RolrCur':  newWidget = new conveyerWidget('RolrCur', 100, 100, 0 , 1, 100, 100); break;
-      case 'BeltStr':  newWidget = new conveyerWidget('BeltStr', 100, 100, 0 , 1, 100, 100); break;
-      case 'BeltCur':  newWidget = new conveyerWidget('BeltCur', 100, 100, 0 , 1, 100, 100); break;
+      case 'RolrStr':  newWidget = new blockWidget('RolrStr', 100, 100, 0 , 1, 100, 100); break;
+      case 'RolrCur':  newWidget = new blockWidget('RolrCur', 100, 100, 0 , 1, 100, 100); break;
+      case 'BeltStr':  newWidget = new blockWidget('BeltStr', 100, 100, 0 , 1, 100, 100); break;
+      case 'BeltCur':  newWidget = new blockWidget('BeltCur', 100, 100, 0 , 1, 100, 100); break;
       default: console.error('unrecognized widget type'); break;
     }
 
