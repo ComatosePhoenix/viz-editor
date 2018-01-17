@@ -78,7 +78,7 @@ export class WidjetComponent implements OnInit {
     })
 
     let dialogRef = this._dialog.open(EditPropertiesComponent,
-      { minWidth: '350px', maxHeight: '600px',
+      { minWidth: '350px', maxWidth: '500px', maxHeight: '600px',
         data: data
       });
     

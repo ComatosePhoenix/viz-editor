@@ -26,7 +26,9 @@ export class conveyerWidget extends Widget{
 
     //What is an HTMLElement, a miserable little pile of secrets?
     renderAsPath():HTMLElement{
-        let html = new HTMLElement;
+        let html = document.createElement('path');
+
+
         return html;
     }
 

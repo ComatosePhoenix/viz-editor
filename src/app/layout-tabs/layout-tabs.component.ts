@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation }     from '@angular/core';
-import { ViewChild, OnInit, OnDestroy }     from '@angular/core';
+import { Component, ViewEncapsulation, QueryList}     from '@angular/core';
+import { OnInit, OnDestroy, ViewChildren}     from '@angular/core';
 import { MatTabsModule, MatTabChangeEvent } from '@angular/material/tabs';
 import { Subscription }                     from 'rxjs/Subscription';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -33,8 +33,8 @@ export class LayoutTabsComponent implements OnInit, OnDestroy {
   public  layoutPages             :LayoutPage[];
   public  selectedTabIndex        :number = 0;
 
-  @ViewChild(WidjetComponent)
-  private _widjetComponent: WidjetComponent;
+  @ViewChildren(WidjetComponent)
+  private _widjetComponents: QueryList<WidjetComponent>
 
   constructor( private _dialog            :MatDialog,
                private _layoutPageService :LayoutPageService,
@@ -279,7 +279,9 @@ export class LayoutTabsComponent implements OnInit, OnDestroy {
   }
 
   public createWidget(str){
-    this._widjetComponent.createWidget(str)
+
+    //I think there should be a better way than toArray
+    this._widjetComponents.toArray()[this.selectedTabIndex].createWidget(str);
   }
 
 }
