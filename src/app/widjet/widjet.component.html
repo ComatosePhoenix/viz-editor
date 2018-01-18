@@ -5,7 +5,7 @@
 	0.375,0.375 45.63,38.087 0.375,75.8 "/>
         </pattern>
     </svg:defs>
-    <svg:g *ngFor ='let widget of widgets; index as i;' id = 'g{{i}}'>
+    <svg:g *ngFor ='let widget of widgets; index as i;' id = 'g{{i}}' class = 'widgetGroup'>
         <svg:path 
                 (dblclick) = edit(i)
                 (mousedown) = grabWidget(widget) 
@@ -15,7 +15,6 @@
                 [attr.transform] = widget.getTransform()
             >
         </svg:path>
-
-        <svg:polygon (click) = delete(i) [attr.points]= widget.editButton() class = 'svg-exit'/>
+        <svg:path (click) = delete(i) [attr.d] = widget.closeButton() class = 'svg-exit'></svg:path>
     </g>
 </svg>

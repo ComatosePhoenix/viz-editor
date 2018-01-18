@@ -80,8 +80,14 @@ export abstract class Widget
     }
 
 
+    //returns a string for a triangular polygon, placeholder probably won't make it to final version.
     public editButton(){
         return (this.x+10)+','+(this.y+10)+' '+ (this.x+10)+ ',' +(this.y+20)+' ' +(this.x+20)+','+ (this.y+15);
+    }
+
+    //returns path d for a x shaped button.
+    public closeButton(){
+        return ['M', this.x+10, ',', this.y+10, 'L' , this.x+30, ',', this.y+30, 'm', 0, ',', -20, 'l', -20, ',', 20].join(' ');
     }
     /*
      *  This method recalculates the length and width for the
