@@ -1,7 +1,10 @@
+import { HostListener } from "@angular/core/src/metadata/directives";
+
 export abstract class Widget
 {
     public isSelected :boolean;
     public isModified :boolean;
+    public svgClass;                    // CSS class associated with the thing.
     public length     :number;          // Length: pixels
     public rotation   :number;          // Rotation angle: degrees, clockwise from noon
     public scale      :number;          // Scale: inches/pixel
@@ -35,17 +38,34 @@ export abstract class Widget
         return (JSON.stringify(this) == JSON.stringify(pWidget));
     }
 
-    /*
-     *  This method creates the <SVG> element that represents the
-     *  equipment unit. This element may either be a <path> or a
-     *  <g> (group) containing multiple elements that visualizes
-     *  the equipment unit and has its 'id' attribute set to the
-     *  widget's 'unitId' which is assumed to be unique.
-     * 
-     *  N.B.: The default line color has been applied;
-     *        the background color HAS NOT.
-     */
-    abstract renderAsPath() :HTMLElement;
+
+    public getRotation(){
+        return this.rotation;
+    }
+
+
+    //returns a 'rotate' string for a transformation, other aspects of transformation are not useful at this time
+    public getTransform(){
+        let xCenter = this.x+this.width/2;
+        let yCenter = this.y+this.length/2;
+        return 'rotate('+ this.rotation+', '+ xCenter+', '+ yCenter+ ')';
+    }
+
+
+    //lazy implementation
+    public mouseRotate(){
+        let me = this; 
+        onmousemove = function(e){
+            me.rotation = Number(me.rotation)+ e.movementX;
+        }
+    }
+
+    public endRotate(){
+        onmousemove = null;
+    }
+
+    //function to retrieve the 'd' parameter of an svg path object. this will allow most widgets to draw unique graphics for themselves.
+    abstract pathAsString():String
 
     public stickToMouse(){
         let me = this;

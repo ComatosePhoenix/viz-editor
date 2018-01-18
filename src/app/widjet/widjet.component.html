@@ -1,11 +1,21 @@
+<svg:svg>
+    <svg:defs>
+        <pattern id = 'arrows'x="0" y="0" width=".25" height=".25">
+                <polyline fill="none" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" points="
+	0.375,0.375 45.63,38.087 0.375,75.8 "/>
+        </pattern>
+    </svg:defs>
     <svg:g *ngFor ='let widget of widgets; index as i;' id = 'g{{i}}'>
-        <svg:path
+        <svg:path 
                 (dblclick) = edit(i)
                 (mousedown) = grabWidget(widget) 
                 (mouseup)= releaseWidget(widget) 
                 [attr.class] = widget.svgClass 
                 [attr.d] = widget.pathAsString()
+                [attr.transform] = widget.getTransform()
             >
         </svg:path>
+
         <svg:polygon (click) = delete(i) [attr.points]= widget.editButton() class = 'svg-exit'/>
     </g>
+</svg>

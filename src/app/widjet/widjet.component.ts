@@ -5,6 +5,8 @@ import { Widget } from '../models/widget';
 import { blockWidget } from './widgets/block-widget';
 import { EditPropertiesComponent } from '../edit-properties/edit-properties.component';
 import { IEditListItem } from '../interfaces/i-edit-list-item';
+import { curveWidget } from './widgets/curve-widgets';
+import { cornerWidget } from './widgets/corner-widget';
 
 
 @Component({
@@ -19,7 +21,8 @@ export class WidjetComponent implements OnInit {
   
   constructor( private _dialog :MatDialog){
     this.widgets = [];
-    let placeholderWidget = new blockWidget('test', 100, 100, 0 , 1, 100, 100);
+
+    let placeholderWidget = new cornerWidget('test', 100, 100, 0 , 1, 100, 100);
 
     this.widgets.push(placeholderWidget);
   }
@@ -28,22 +31,15 @@ export class WidjetComponent implements OnInit {
     let newWidget;
     switch (type){
       case 'RolrStr':  newWidget = new blockWidget('RolrStr', 100, 100, 0 , 1, 100, 100); break;
-      case 'RolrCur':  newWidget = new blockWidget('RolrCur', 100, 100, 0 , 1, 100, 100); break;
+      case 'RolrCur':  newWidget = new curveWidget('RolrCur', 100, 100, 0 , 1, 100, 100); break;
       case 'BeltStr':  newWidget = new blockWidget('BeltStr', 100, 100, 0 , 1, 100, 100); break;
-      case 'BeltCur':  newWidget = new blockWidget('BeltCur', 100, 100, 0 , 1, 100, 100); break;
+      case 'BeltCur':  newWidget = new curveWidget('BeltCur', 100, 100, 0 , 1, 100, 100); break;
       default: console.error('unrecognized widget type'); break;
     }
 
     this.widgets.push(newWidget);
   }
 
-
-  private renderWidgets(){
-    this.widgets.forEach(function(widget){
-      this._svgTarget.append(widget.renderAsPath);
-    })
-
-  }
 
 
   ngOnInit() {

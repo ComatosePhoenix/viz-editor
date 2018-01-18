@@ -4,7 +4,7 @@ import {Widget} from '../../models/widget'
 
 export class blockWidget extends Widget{
     public properties // properties are an object that will somehow uniquely connect the widget to its real life counterpart.
-    public svgClass;
+
     public x;
     public y;
     
@@ -22,7 +22,10 @@ export class blockWidget extends Widget{
    
 
     //What is an HTMLElement, a miserable little pile of secrets?
+    //after further reflection the HTMLElement is not a useful value and has been depricated. 
     renderAsPath():HTMLElement{
+        console.warn("renderAsPath is bad and you shouldn't be using it");
+
         let html = document.createElement('path');
         let pathstring = "M " + this.x+ " "+ this.y+" h "+ this.length +" v "+ this.width+ " h -"+ this.length + " v -" +this.width
         html.setAttribute('d', pathstring);
